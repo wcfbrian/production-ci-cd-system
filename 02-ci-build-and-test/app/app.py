@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    raise Exception("CI/CD Prod Error")
+    raise Exception("CI/CD Prod broken")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
