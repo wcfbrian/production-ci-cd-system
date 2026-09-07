@@ -27,7 +27,22 @@ jobs:
         run: docker run -d -p 5000:5000 --name prod-container cicd-prod
 
       - name: Wait for App
-        run: sleep 5
+        run: |
+          for i in {1...10}; do
+            if curl -s http://localhost:5000; then
+              echo "App is up!"
+              exit 0
+            fi
+            echo "Waiting for app..."
+            sleep 2
+          done
 
-      - name: Fake Test
-        run: echo "All tests passed successfully"
+          echo "App failed to start"
+          exit 1
+
+      - name: Real Health Check
+        run: curl -f http://localhost:5000
+
+      - name: Cleanup container
+        if: always()
+        run: docker stop prod-container && docker rm prod-container
