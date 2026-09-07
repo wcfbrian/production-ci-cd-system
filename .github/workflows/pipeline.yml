@@ -7,7 +7,7 @@ on:
       - dev
 
 jobs:
-  check:
+  check-just-a-name:
     runs-on: ubuntu-latest
 
     steps:
