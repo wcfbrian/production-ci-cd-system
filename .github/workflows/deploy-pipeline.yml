@@ -3,7 +3,7 @@ name: Deploy Pipeline
 on:
   push:
     paths:
-      - '4-ci-build-and-test/**'
+      - '04-deployment-success-but-app-down/**'
       - '.github/workflows/**'
     branches:
       - main
@@ -11,11 +11,11 @@ on:
 
 jobs:
   build-test:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     defaults:
       run:
-        working-directory: 04-ci-build-and-test
+        working-directory: 04-deployment-success-but-app-down
     env:
       API_KEY: ${{ secrets.API_KEY }}
 
